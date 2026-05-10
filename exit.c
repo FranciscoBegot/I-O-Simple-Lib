@@ -1,10 +1,12 @@
-#include <unistd.h> // lib padrao do unix (posix)
+#include <unistd.h> // standard unix library (posix)
 #include <sys/syscall.h>
+
 int main()
-{ // entrada do binario
+{ // binary entry point
 
+    // equivalent to the exit system call
+    _exit(0); 
 
-    _exit(0); // correspondente da chamada exit
-    syscall(SYS_exit_group, 0); // outra forma de fazer o mesmo
-
+    // another way to achieve the same result using the syscall interface
+    syscall(SYS_exit_group, 0); 
 }
