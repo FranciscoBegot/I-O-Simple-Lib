@@ -1,22 +1,19 @@
-extern my_exit ; importando o codigo de saida segura, o mesmo mostrado anteriormente
-global main ; Main entry point. avisar o linker com -e main
+extern my_exit ; importing the safe exit routine shown previously
+global main ; main entry point. notifies the linker using the -e main flag
 
-section .data ; label de data --> dados inicializados
+section .data ; data section --> initialized data
 
-    string: db 'Write usando a label data',10 ; define byte terminando em \n(10)
-    tamanho: equ $ - string ; constante pra pegar o tamanho da string
+    string: db 'Write using the data label',10 ; define byte ending with a newline (10)
+    tamanho: equ $ - string ; constant to calculate the string length dynamically
 
-section .text ; label de execucao
+section .text ; execution section
 
 main:
 
     mov rax,1 ; syscall write (1)
-    mov rdi,1 ; file decriptor de stdout(1)
+    mov rdi,1 ; file descriptor for stdout (1)
 
-    mov rsi,string ; ponteiro pra string
-    mov rdx,tamanho  ; tamanho da string
-    syscall ; kernel execute isso
-    call my_exit
-
-
-
+    mov rsi,string ; pointer to the string
+    mov rdx,tamanho  ; size of the string
+    syscall ; tell the kernel to execute this
+    call my_exit ; call our external exit function
