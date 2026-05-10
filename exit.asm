@@ -1,17 +1,17 @@
-global my_exit ; ponto de entrada global. e necessario linkarlo com a opcao -e main pra demonstrar pro liker o ponto de entrada. ele por padrao usa _start
+global my_exit ; global entry point. must be linked with the -e main option to show the linker the entry point. by default, it uses _start
 
 section .text
 
 my_exit:
-    ; tal syscall e utilizada com o finco de retrno de sucesso ao fim de um programa
-    ; ela e necessaria para evitar erros de segmentation fault
-    ;com ela, finalizamos um processo de maneira segura
+    ; this syscall is used to return a success status at the end of a program
+    ; it is necessary to prevent segmentation fault errors
+    ; with it, we terminate a process in a safe manner
 
-    mov rax,60 ; numero da chamada de sistema definida na tabela de chamadas do linux
-                ; podemos velas em arch/x86/entry/syscalls/syscall_64.tbl
-    xor rdi,rdi ; codigo de saida 0, tudo certo
+    mov rax,60 ; system call number defined in the linux syscall table
+               ; these can be found in arch/x86/entry/syscalls/syscall_64.tbl
+    xor rdi,rdi ; exit code 0, meaning everything is correct
 
-    syscall ; kernel vai verificar rax, e associar aos padroes exigidos pela chamada de sistema exit
+    syscall ; the kernel will check rax and map it to the requirements of the exit system call
 
 
-            ; para confirmar o retorno, utilize o comando echo $?
+            ; to confirm the return value, use the command: echo $?
