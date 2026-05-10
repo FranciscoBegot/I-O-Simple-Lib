@@ -4,9 +4,9 @@ global main
 section .text
 
 main:
-    sub rsp, 32              ; reserva espaço na stack
+    sub rsp, 32              ; reserves space on the stack ( 32 b)
 
-    ; "usando a stack agora\n"
+    ; using the stack now
     mov byte [rsp + 0], 'u'
     mov byte [rsp + 1], 's'
     mov byte [rsp + 2], 'a'
@@ -29,13 +29,13 @@ main:
     mov byte [rsp + 19], 'a'
     mov byte [rsp + 20], 10   ; '\n'
 
-    ;preparando a write
+    ;preparing syscall write
     mov rax, 1                ; syscall write
     mov rdi, 1                ; stdout
-    mov rsi, rsp              ; buffer na stack
-    mov rdx, 21               ; tamanho
+    mov rsi, rsp              ; buffer stack
+    mov rdx, 21               ; size
     syscall
 
-    add rsp, 32              ; limpa stack
+    add rsp, 32              ; cleans the stack
 
     call my_exit
