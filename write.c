@@ -3,12 +3,16 @@
 
 int main(){
     
-    char msg[] = "Hello,Prof Diego so que com syscall.h\n";
+    char msg[] = "Hello,Prof Diego but with syscall.h\n";
 
-    write(1,"Hello,Prof Diego!\n",18); // Aqui usamos a funcao write de unistd pra invocar a chamada de write
-    syscall(SYS_write, 1, msg,sizeof(msg)-1); // aqui usamos a syscall.h para chamar a syscall de write
-    _exit(0); // saida segura com unistd.h ( EXIT syscall) 
+   // we use the write function from unistd.h to invoke the write system call
+    write(1, "Hello, Prof Diego!\n", 18); 
 
+    // here we use syscall.h to manually trigger the write syscall by its ID
+    syscall(SYS_write, 1, msg, sizeof(msg) - 1); 
+
+    // safe exit using unistd.h to trigger the sys_exit syscall
+    _exit(0);
 
 
     }
